@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  evently.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "5003:8080"
+    volumes:
+      - usersecrets:/home/app/.microsoft/usersecrets:ro
+      - httpscerts:/home/app/.aspnet/https:ro
+volumes:
+  usersecrets:
+  httpscerts:

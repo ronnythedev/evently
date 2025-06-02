@@ -41,8 +41,3 @@ public sealed class Event : Entity
         return @event;
     }
 }
-
-public sealed class EventCreatedDomainEvent(Guid eventId) : DomainEvent
-{
-    public Guid EventId { get; init; } = eventId;
-}

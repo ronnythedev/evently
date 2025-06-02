@@ -1,4 +1,6 @@
 ﻿using Evently.Modules.Events.Application.Events;
+using Evently.Modules.Events.Domain.Abstractions;
+using Evently.Modules.Events.Presentation.ApiResults;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -11,16 +13,14 @@ internal static class CreateEvent
     {
         app.MapPost("events", async (Request request, ISender sender) =>
             {
-                var command = new CreateEventCommand(
+                Result<Guid> result = await sender.Send(new CreateEventCommand(
                     request.Title,
                     request.Description,
                     request.Location,
                     request.StartsAtUtc,
-                    request.EndsAtUtc);
+                    request.EndsAtUtc));
 
-                Guid eventId = await sender.Send(command);
-
-                return Results.Ok(eventId);
+                return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
             })
             .WithTags(Tags.Events);
     }

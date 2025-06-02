@@ -2,17 +2,37 @@
 
 public sealed class Event
 {
-    public Guid Id { get; set; }
+    private Event(){}
+    
+    public Guid Id { get; private set; }
 
-    public string Title { get; set; }
+    public string Title { get; private set; }
 
-    public string Description { get; set; }
+    public string Description { get; private set; }
 
-    public string Location { get; set; }
+    public string Location { get; private set; }
 
-    public DateTime StartsAtUtc { get; set; }
+    public DateTime StartsAtUtc { get; private set; }
 
-    public DateTime? EndsAtUtc { get; set; }
+    public DateTime? EndsAtUtc { get; private set; }
 
-    public EventStatus Status { get; set; }
+    public EventStatus Status { get; private set; }
+    
+    public static Event Create(
+        string title,
+        string description,
+        string location,
+        DateTime startsAtUtc,
+        DateTime? endsAtUtc)
+    {
+        return new Event
+        {
+            Id = Guid.NewGuid(),
+            Title = title,
+            Description = description,
+            Location = location,
+            StartsAtUtc = startsAtUtc,
+            EndsAtUtc = endsAtUtc
+        };
+    }
 }

@@ -1,9 +1,10 @@
-﻿namespace Evently.Modules.Events.Domain.Events;
+﻿using Evently.Modules.Events.Domain.Abstractions;
+namespace Evently.Modules.Events.Domain.Events;
 
-public sealed class Event
+public sealed class Event : Entity
 {
-    private Event(){}
-    
+    private Event() { }
+
     public Guid Id { get; private set; }
 
     public string Title { get; private set; }
@@ -17,7 +18,7 @@ public sealed class Event
     public DateTime? EndsAtUtc { get; private set; }
 
     public EventStatus Status { get; private set; }
-    
+
     public static Event Create(
         string title,
         string description,
@@ -25,7 +26,7 @@ public sealed class Event
         DateTime startsAtUtc,
         DateTime? endsAtUtc)
     {
-        return new Event
+        var @event = new Event
         {
             Id = Guid.NewGuid(),
             Title = title,
@@ -34,5 +35,14 @@ public sealed class Event
             StartsAtUtc = startsAtUtc,
             EndsAtUtc = endsAtUtc
         };
+
+        @event.Raise(new EventCreatedDomainEvent(@event.Id));
+
+        return @event;
     }
+}
+
+public sealed class EventCreatedDomainEvent(Guid eventId) : DomainEvent
+{
+    public Guid EventId { get; init; } = eventId;
 }

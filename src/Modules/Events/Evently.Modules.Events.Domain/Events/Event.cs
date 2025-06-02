@@ -61,4 +61,17 @@ public sealed class Event : Entity
 
         return Result.Success();
     }
+    
+    public void Reschedule(DateTime startsAtUtc, DateTime? endsAtUtc)
+    {
+        if (StartsAtUtc == startsAtUtc && EndsAtUtc == endsAtUtc)
+        {
+            return;
+        }
+
+        StartsAtUtc = startsAtUtc;
+        EndsAtUtc = endsAtUtc;
+
+        Raise(new EventRescheduledDomainEvent(Id, StartsAtUtc, EndsAtUtc));
+    }
 }

@@ -74,4 +74,23 @@ public sealed class Event : Entity
 
         Raise(new EventRescheduledDomainEvent(Id, StartsAtUtc, EndsAtUtc));
     }
+    
+    public Result Cancel(DateTime utcNow)
+    {
+        if (Status == EventStatus.Canceled)
+        {
+            return Result.Failure(EventErrors.AlreadyCanceled);
+        }
+
+        if (StartsAtUtc < utcNow)
+        {
+            return Result.Failure(EventErrors.AlreadyStarted);
+        }
+
+        Status = EventStatus.Canceled;
+
+        Raise(new EventCanceledDomainEvent(Id));
+
+        return Result.Success();
+    }
 }

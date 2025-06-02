@@ -1,4 +1,6 @@
 ﻿using Evently.Modules.Events.Application.Abstractions.Data;
+using Evently.Modules.Events.Application.Abstractions.Messaging;
+using Evently.Modules.Events.Domain.Abstractions;
 using Evently.Modules.Events.Domain.Events;
 using FluentValidation;
 using MediatR;
@@ -10,7 +12,7 @@ public sealed record CreateEventCommand(
     string Description,
     string Location,
     DateTime StartsAtUtc,
-    DateTime? EndsAtUtc) : IRequest<Guid>;
+    DateTime? EndsAtUtc) : ICommand<Guid>;
 
 public sealed class CreateEventCommandValidator : AbstractValidator<CreateEventCommand>
 {
@@ -27,21 +29,26 @@ public sealed class CreateEventCommandValidator : AbstractValidator<CreateEventC
 }
 
 internal sealed class CreateEventCommandHandler(IEventRepository eventRepository, IUnitOfWork unitOfWork)
-    : IRequestHandler<CreateEventCommand, Guid>
+    : ICommandHandler<CreateEventCommand, Guid>
 {
-    public async Task<Guid> Handle(CreateEventCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CreateEventCommand request, CancellationToken cancellationToken)
     {
-        var @event = Event.Create(
+        Result<Event> result = Event.Create(
             request.Title,
             request.Description,
             request.Location,
             request.StartsAtUtc,
             request.EndsAtUtc);
 
-        eventRepository.Insert(@event);
+        if (result.IsFailure)
+        {
+            return Result.Failure<Guid>(result.Error);
+        }
+        
+        eventRepository.Insert(result.Value);
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return @event.Id;
+        return result.Value.Id;
     }
 }

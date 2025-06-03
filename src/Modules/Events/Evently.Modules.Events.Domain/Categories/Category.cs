@@ -24,4 +24,23 @@ public class Category : Entity
 
         return category;
     }
+
+    public void Archive()
+    {
+        IsArchived = true;
+        
+        Raise(new CategoryArchivedDomainEvent(Id));
+    }
+
+    public void ChangeName(string name)
+    {
+        if (Name == name)
+        {
+            return; 
+        }
+        
+        Name = name;
+        
+        Raise(new CategoryNameChangedDomainEvent(Id, Name));
+    }
 }

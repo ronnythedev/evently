@@ -15,12 +15,13 @@ internal sealed class GetEventQueryHandler(IDbConnectionFactory dbConnectionFact
         const string sql = 
             $"""
              SELECT
-                id AS {nameof(EventResponse.Id)},
-                title AS {nameof(EventResponse.Title)},
-                description AS {nameof(EventResponse.Description)},
-                location AS {nameof(EventResponse.Location)},
-                starts_at_utc AS {nameof(EventResponse.StartsAtUtc)},
-                ends_at_utc AS {nameof(EventResponse.EndsAtUtc)}
+                e.id AS {nameof(EventResponse.Id)},
+                e.category_id AS {nameof(EventResponse.CategoryId)},
+                e.title AS {nameof(EventResponse.Title)},
+                e.description AS {nameof(EventResponse.Description)},
+                e.location AS {nameof(EventResponse.Location)},
+                e.starts_at_utc AS {nameof(EventResponse.StartsAtUtc)},
+                e.ends_at_utc AS {nameof(EventResponse.EndsAtUtc)}
              FROM events.events
              WHERE id = @EventId
              """;

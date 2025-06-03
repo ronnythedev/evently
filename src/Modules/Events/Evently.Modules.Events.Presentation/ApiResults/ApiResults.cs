@@ -4,7 +4,7 @@ namespace Evently.Modules.Events.Presentation.ApiResults;
 
 public static class ApiResults
 {
-        public static IResult Problem(Result result)
+    public static IResult Problem(Result result)
     {
         if (result.IsSuccess)
         {
@@ -67,7 +67,9 @@ public static class ApiResults
 
             return new Dictionary<string, object?>
             {
-                { "errors", validationError.Errors }
+                {
+                    "errors", validationError.Errors
+                }
             };
         }
     }

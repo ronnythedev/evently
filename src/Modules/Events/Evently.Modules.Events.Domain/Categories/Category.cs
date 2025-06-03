@@ -20,7 +20,7 @@ public class Category : Entity
             IsArchived = false
         };
         
-        // Raise domain event for category creation here
+        category.Raise(new CategoryCreatedDomainEvent(category.Id));
 
         return category;
     }

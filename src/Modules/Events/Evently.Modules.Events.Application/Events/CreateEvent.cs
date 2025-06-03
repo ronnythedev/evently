@@ -1,4 +1,5 @@
-﻿using Evently.Modules.Events.Application.Abstractions.Data;
+﻿using Evently.Modules.Events.Application.Abstractions.Clock;
+using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.Abstractions.Messaging;
 using Evently.Modules.Events.Domain.Abstractions;
 using Evently.Modules.Events.Domain.Events;
@@ -28,11 +29,19 @@ public sealed class CreateEventCommandValidator : AbstractValidator<CreateEventC
     }
 }
 
-internal sealed class CreateEventCommandHandler(IEventRepository eventRepository, IUnitOfWork unitOfWork)
+internal sealed class CreateEventCommandHandler(
+    IDateTimeProvider dateTimeProvider,
+    IEventRepository eventRepository, 
+    IUnitOfWork unitOfWork)
     : ICommandHandler<CreateEventCommand, Guid>
 {
     public async Task<Result<Guid>> Handle(CreateEventCommand request, CancellationToken cancellationToken)
     {
+        if (request.StartsAtUtc < dateTimeProvider.UtcNow)
+        {
+            return Result.Failure<Guid>(EventErrors.StartDateInPast);
+        }
+        
         Result<Event> result = Event.Create(
             request.Title,
             request.Description,

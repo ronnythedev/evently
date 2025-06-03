@@ -1,6 +1,8 @@
-﻿using Evently.Modules.Events.Application.Abstractions.Data;
+﻿using Evently.Modules.Events.Application.Abstractions.Clock;
+using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.Events;
 using Evently.Modules.Events.Domain.Events;
+using Evently.Modules.Events.Infrastructure.Clock;
 using Evently.Modules.Events.Infrastructure.Database;
 using Evently.Modules.Events.Infrastructure.Events;
 using Evently.Modules.Events.Presentation.Events;
@@ -46,6 +48,8 @@ public static class EventsModule
 
         services.AddScoped<IDbConnectionFactory, IDbConnectionFactory>();
 
+        services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
+        
         services.AddDbContext<EventsDbContext>(options =>
             options
                 .UseNpgsql(

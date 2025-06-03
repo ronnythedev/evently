@@ -9,5 +9,6 @@ public static class EventEndpoints
         GetEvent.MapEndpoint(app);
         GetEvents.MapEndpoint(app);
         CancelEvent.MapEndpoint(app);
+        RescheduleEvent.MapEndpoint(app);
     }
 }

@@ -13,11 +13,11 @@ internal static class GetCategory
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapGet("categories/{id}", async (Guid id, ISender sender) =>
-        {
-            Result<CategoryResponse> result = await sender.Send(new GetCategoryQuery(id));
+            {
+                Result<CategoryResponse> result = await sender.Send(new GetCategoryQuery(id));
 
-            return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
-        })
-        .WithTags(Tags.Categories);
+                return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
+            })
+            .WithTags(Tags.Categories);
     }
 }

@@ -20,5 +20,5 @@ internal static class GetEvents
             })
             .WithTags(Tags.Events);
     }
-    
+
 }

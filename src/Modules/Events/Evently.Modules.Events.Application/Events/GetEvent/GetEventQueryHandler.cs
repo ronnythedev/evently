@@ -1,12 +1,9 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 using Dapper;
 using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.Abstractions.Messaging;
 using Evently.Modules.Events.Domain.Abstractions;
-using MediatR;
-namespace Evently.Modules.Events.Application.Events;
-
-public sealed record GetEventQuery(Guid EventId) : IQuery<EventResponse>;
+namespace Evently.Modules.Events.Application.Events.GetEvent;
 
 internal sealed class GetEventQueryHandler(IDbConnectionFactory dbConnectionFactory) 
     : IQueryHandler<GetEventQuery, EventResponse>

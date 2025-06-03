@@ -1,4 +1,5 @@
 ﻿using Evently.Modules.Events.Application.Events;
+using Evently.Modules.Events.Application.Events.GetEvent;
 using Evently.Modules.Events.Domain.Abstractions;
 using Evently.Modules.Events.Presentation.ApiResults;
 using MediatR;

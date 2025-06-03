@@ -2,6 +2,7 @@
 using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.Abstractions.Messaging;
 using Evently.Modules.Events.Domain.Abstractions;
+using Evently.Modules.Events.Domain.Categories;
 using Evently.Modules.Events.Domain.Events;
 using FluentValidation;
 using MediatR;
@@ -9,6 +10,7 @@ using MediatR;
 namespace Evently.Modules.Events.Application.Events;
 
 public sealed record CreateEventCommand(
+    Guid CategoryId,
     string Title,
     string Description,
     string Location,
@@ -19,6 +21,7 @@ public sealed class CreateEventCommandValidator : AbstractValidator<CreateEventC
 {
     public CreateEventCommandValidator()
     {
+        RuleFor(c => c.CategoryId).NotEmpty();
         RuleFor(c => c.Title).NotEmpty();
         RuleFor(c => c.Description).NotEmpty();
         RuleFor(c => c.Location).NotEmpty();
@@ -31,7 +34,8 @@ public sealed class CreateEventCommandValidator : AbstractValidator<CreateEventC
 
 internal sealed class CreateEventCommandHandler(
     IDateTimeProvider dateTimeProvider,
-    IEventRepository eventRepository, 
+    ICategoryRepository categoryRepository,
+    IEventRepository eventRepository,
     IUnitOfWork unitOfWork)
     : ICommandHandler<CreateEventCommand, Guid>
 {
@@ -41,8 +45,16 @@ internal sealed class CreateEventCommandHandler(
         {
             return Result.Failure<Guid>(EventErrors.StartDateInPast);
         }
+
+        Category? category = await categoryRepository.GetAsync(request.CategoryId, cancellationToken);
+
+        if (category is null)
+        {
+            return Result.Failure<Guid>(CategoryErrors.NotFound(request.CategoryId));
+        }
         
         Result<Event> result = Event.Create(
+            category,
             request.Title,
             request.Description,
             request.Location,

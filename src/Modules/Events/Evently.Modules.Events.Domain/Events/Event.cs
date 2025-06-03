@@ -1,4 +1,5 @@
 ﻿using Evently.Modules.Events.Domain.Abstractions;
+using Evently.Modules.Events.Domain.Categories;
 namespace Evently.Modules.Events.Domain.Events;
 
 public sealed class Event : Entity
@@ -22,6 +23,7 @@ public sealed class Event : Entity
     public EventStatus Status { get; private set; }
 
     public static Result<Event> Create(
+        Category category,
         string title,
         string description,
         string location,
@@ -36,11 +38,13 @@ public sealed class Event : Entity
         var @event = new Event
         {
             Id = Guid.NewGuid(),
+            CategoryId = category.Id,
             Title = title,
             Description = description,
             Location = location,
             StartsAtUtc = startsAtUtc,
-            EndsAtUtc = endsAtUtc
+            EndsAtUtc = endsAtUtc,
+            Status = EventStatus.Draft
         };
 
         @event.Raise(new EventCreatedDomainEvent(@event.Id));

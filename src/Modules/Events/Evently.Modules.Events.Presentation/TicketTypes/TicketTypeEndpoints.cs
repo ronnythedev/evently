@@ -8,5 +8,6 @@ public static class TicketTypeEndpoints
         CreateTicketType.MapEndpoint(app);
         GetTicketType.MapEndpoint(app);
         GetTicketTypes.MapEndpoint(app);
+        ChangeTicketTypePrice.MapEndpoint(app);
     }
 }

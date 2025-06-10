@@ -11,6 +11,7 @@ using Evently.Modules.Events.Infrastructure.Events;
 using Evently.Modules.Events.Infrastructure.TicketTypes;
 using Evently.Modules.Events.Presentation.Categories;
 using Evently.Modules.Events.Presentation.Events;
+using Evently.Modules.Events.Presentation.TicketTypes;
 using FluentValidation;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ public static class EventsModule
     {
         CategoryEndpoints.MapEndpoints(app);
         EventEndpoints.MapEndpoints(app);
+        TicketTypeEndpoints.MapEndpoints(app);
     }
 
     public static IServiceCollection AddEventsModule(
@@ -39,7 +41,7 @@ public static class EventsModule
         });
 
         services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly, includeInternalTypes: true);
-        
+
         services.AddInfrastructure(configuration);
 
         return services;
@@ -55,7 +57,7 @@ public static class EventsModule
         services.AddScoped<IDbConnectionFactory, IDbConnectionFactory>();
 
         services.TryAddSingleton<IDateTimeProvider, DateTimeProvider>();
-        
+
         services.AddDbContext<EventsDbContext>(options =>
             options
                 .UseNpgsql(
@@ -65,10 +67,9 @@ public static class EventsModule
                 .UseSnakeCaseNamingConvention());
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
-        
+
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
     }
-
 }

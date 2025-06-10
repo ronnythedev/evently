@@ -1,10 +1,14 @@
 ﻿using Evently.Modules.Events.Application.Abstractions.Clock;
 using Evently.Modules.Events.Application.Abstractions.Data;
 using Evently.Modules.Events.Application.Events;
+using Evently.Modules.Events.Domain.Categories;
 using Evently.Modules.Events.Domain.Events;
+using Evently.Modules.Events.Domain.TicketTypes;
+using Evently.Modules.Events.Infrastructure.Categories;
 using Evently.Modules.Events.Infrastructure.Clock;
 using Evently.Modules.Events.Infrastructure.Database;
 using Evently.Modules.Events.Infrastructure.Events;
+using Evently.Modules.Events.Infrastructure.TicketTypes;
 using Evently.Modules.Events.Presentation.Categories;
 using Evently.Modules.Events.Presentation.Events;
 using FluentValidation;
@@ -60,9 +64,11 @@ public static class EventsModule
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Events))
                 .UseSnakeCaseNamingConvention());
 
+        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());
+        
         services.AddScoped<IEventRepository, EventRepository>();
-
-        services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<EventsDbContext>());        
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
     }
 
 }

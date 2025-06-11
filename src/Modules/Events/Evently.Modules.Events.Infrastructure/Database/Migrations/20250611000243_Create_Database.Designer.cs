@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Evently.Modules.Events.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
-    [Migration("20250610182027_Add_Category_and_TicketType_entities")]
-    partial class Add_Category_and_TicketType_entities
+    [Migration("20250611000243_Create_Database")]
+    partial class Create_Database
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Evently.Modules.Events.Infrastructure.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("events")
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);

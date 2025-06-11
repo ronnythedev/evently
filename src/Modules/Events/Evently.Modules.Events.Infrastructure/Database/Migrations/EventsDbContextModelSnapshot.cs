@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Evently.Modules.Events.Api.Database.Migrations
+namespace Evently.Modules.Events.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(EventsDbContext))]
     partial class EventsDbContextModelSnapshot : ModelSnapshot
@@ -18,7 +18,7 @@ namespace Evently.Modules.Events.Api.Database.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("events")
-                .HasAnnotation("ProductVersion", "8.0.4")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);

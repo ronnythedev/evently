@@ -11,21 +11,21 @@ internal static class CreateTicketType
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("ticket-types", async (Request request, ISender sender) =>
+        app.MapPost("ticket-types", async (CreateTicketTypeRequest createTicketTypeRequest, ISender sender) =>
             {
                 Result<Guid> result = await sender.Send(new CreateTicketTypeCommand(
-                    request.EventId,
-                    request.Name,
-                    request.Price,
-                    request.Currency,
-                    request.Quantity));
+                    createTicketTypeRequest.EventId,
+                    createTicketTypeRequest.Name,
+                    createTicketTypeRequest.Price,
+                    createTicketTypeRequest.Currency,
+                    createTicketTypeRequest.Quantity));
 
                 return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
             })
             .WithTags(Tags.TicketTypes);
     }
 
-    internal sealed class Request
+    internal sealed class CreateTicketTypeRequest
     {
         public Guid EventId { get; init; }
 

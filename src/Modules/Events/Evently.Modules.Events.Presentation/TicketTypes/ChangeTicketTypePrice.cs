@@ -11,16 +11,16 @@ internal static class ChangeTicketTypePrice
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPut("ticket-types/{id}/price", async (Guid id, Request request, ISender sender) =>
+        app.MapPut("ticket-types/{id}/price", async (Guid id, ChangeTicketTypePriceRequest changeTicketTypePriceRequest, ISender sender) =>
             {
-                Result result = await sender.Send(new UpdateTicketTypePriceCommand(id, request.Price));
+                Result result = await sender.Send(new UpdateTicketTypePriceCommand(id, changeTicketTypePriceRequest.Price));
 
                 return result.Match(Results.NoContent, ApiResults.ApiResults.Problem);
             })
             .WithTags(Tags.TicketTypes);
     }
 
-    internal sealed class Request
+    internal sealed class ChangeTicketTypePriceRequest
     {
         public decimal Price { get; init; }
     }

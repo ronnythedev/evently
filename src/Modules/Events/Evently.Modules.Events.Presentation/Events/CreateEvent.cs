@@ -12,22 +12,22 @@ internal static class CreateEvent
 {
     public static void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("events", async (Request request, ISender sender) =>
+        app.MapPost("events", async (CreateEventRequest createEventRequest, ISender sender) =>
             {
                 Result<Guid> result = await sender.Send(new CreateEventCommand(
-                    request.CategoryId,
-                    request.Title,
-                    request.Description,
-                    request.Location,
-                    request.StartsAtUtc,
-                    request.EndsAtUtc));
+                    createEventRequest.CategoryId,
+                    createEventRequest.Title,
+                    createEventRequest.Description,
+                    createEventRequest.Location,
+                    createEventRequest.StartsAtUtc,
+                    createEventRequest.EndsAtUtc));
 
                 return result.Match(Results.Ok, ApiResults.ApiResults.Problem);
             })
             .WithTags(Tags.Events);
     }
 
-    internal sealed class Request
+    internal sealed class CreateEventRequest
     {
         public Guid CategoryId { get; set; }
         public string Title { get; set; }

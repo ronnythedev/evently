@@ -1,5 +1,5 @@
 using Evently.Common.Application.Clock;
-namespace Evently.Modules.Events.Infrastructure.Clock;
+namespace Evently.Common.Infrastructure.Clock;
 
 internal sealed class DateTimeProvider : IDateTimeProvider
 {

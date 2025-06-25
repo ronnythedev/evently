@@ -1,8 +1,9 @@
 using System.Data.Common;
 using Dapper;
+using Evently.Common.Application.Data;
+using Evently.Common.Application.Messaging;
+using Evently.Common.Domain;
 using Evently.Modules.Events.Application.Abstractions.Data;
-using Evently.Modules.Events.Application.Abstractions.Messaging;
-using Evently.Modules.Events.Domain.Abstractions;
 namespace Evently.Modules.Events.Application.Events.GetEvents;
 
 internal sealed class GetEventsQueryHandler(IDbConnectionFactory dbConnectionFactory)

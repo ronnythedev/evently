@@ -1,4 +1,4 @@
-using Evently.Modules.Events.Domain.Abstractions;
+using Evently.Common.Domain;
 namespace Evently.Modules.Events.Domain.Categories;
 
 public sealed class CategoryNameChangedDomainEvent(Guid categoryId, string name) : DomainEvent

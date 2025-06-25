@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-namespace Evently.Modules.Events.Domain.Abstractions;
+namespace Evently.Common.Domain;
 
 public class Result
 {

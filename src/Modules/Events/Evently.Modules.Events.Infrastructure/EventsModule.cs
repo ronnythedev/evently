@@ -37,8 +37,6 @@ public static class EventsModule
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        
-
         services.AddInfrastructure(configuration);
 
         return services;

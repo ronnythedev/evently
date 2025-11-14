@@ -39,6 +39,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Common.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Common.Presentation", "src\Common\Evently.Common.Presentation\Evently.Common.Presentation.csproj", "{DEA4F260-C807-4DFA-889B-EB05F26F2DC7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{49BFFAE8-4796-40AF-868C-DE3996F67ADF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Modules.Users.Domain", "src\Modules\Users\Evently.Modules.Users.Domain\Evently.Modules.Users.Domain.csproj", "{0FFA61B5-191A-49BE-8DF6-3882924B0476}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Modules.Users.Application", "src\Modules\Users\Evently.Modules.Users.Application\Evently.Modules.Users.Application.csproj", "{A520C391-8356-4E98-B1D4-8547A0B5C3B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Modules.Users.Infrastructure", "src\Modules\Users\Evently.Modules.Users.Infrastructure\Evently.Modules.Users.Infrastructure.csproj", "{3BD03ACE-77C4-4C9C-B927-4B4A171214C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evently.Modules.Users.Presentation", "src\Modules\Users\Evently.Modules.Users.Presentation\Evently.Modules.Users.Presentation.csproj", "{1EC11A91-B3A7-4C4C-9D77-5A6A22761640}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +95,22 @@ Global
 		{DEA4F260-C807-4DFA-889B-EB05F26F2DC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEA4F260-C807-4DFA-889B-EB05F26F2DC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEA4F260-C807-4DFA-889B-EB05F26F2DC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FFA61B5-191A-49BE-8DF6-3882924B0476}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FFA61B5-191A-49BE-8DF6-3882924B0476}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FFA61B5-191A-49BE-8DF6-3882924B0476}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FFA61B5-191A-49BE-8DF6-3882924B0476}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A520C391-8356-4E98-B1D4-8547A0B5C3B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A520C391-8356-4E98-B1D4-8547A0B5C3B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A520C391-8356-4E98-B1D4-8547A0B5C3B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A520C391-8356-4E98-B1D4-8547A0B5C3B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD03ACE-77C4-4C9C-B927-4B4A171214C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD03ACE-77C4-4C9C-B927-4B4A171214C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD03ACE-77C4-4C9C-B927-4B4A171214C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD03ACE-77C4-4C9C-B927-4B4A171214C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC11A91-B3A7-4C4C-9D77-5A6A22761640}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC11A91-B3A7-4C4C-9D77-5A6A22761640}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC11A91-B3A7-4C4C-9D77-5A6A22761640}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC11A91-B3A7-4C4C-9D77-5A6A22761640}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +129,11 @@ Global
 		{F3EF2EEE-8465-472F-AD8D-0EB9812BBE39} = {589E391C-27D6-41D9-854F-2A6A98E58951}
 		{5B6E1026-FF06-4B5E-91D0-797663538F62} = {589E391C-27D6-41D9-854F-2A6A98E58951}
 		{DEA4F260-C807-4DFA-889B-EB05F26F2DC7} = {589E391C-27D6-41D9-854F-2A6A98E58951}
+		{49BFFAE8-4796-40AF-868C-DE3996F67ADF} = {A1AC4679-C096-44E4-8492-0D3C8648B7F1}
+		{0FFA61B5-191A-49BE-8DF6-3882924B0476} = {49BFFAE8-4796-40AF-868C-DE3996F67ADF}
+		{A520C391-8356-4E98-B1D4-8547A0B5C3B5} = {49BFFAE8-4796-40AF-868C-DE3996F67ADF}
+		{3BD03ACE-77C4-4C9C-B927-4B4A171214C6} = {49BFFAE8-4796-40AF-868C-DE3996F67ADF}
+		{1EC11A91-B3A7-4C4C-9D77-5A6A22761640} = {49BFFAE8-4796-40AF-868C-DE3996F67ADF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E42AE86-7F3C-45F4-A386-AB71CC4446CB}

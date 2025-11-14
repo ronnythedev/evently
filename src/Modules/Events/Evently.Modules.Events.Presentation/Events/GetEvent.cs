@@ -1,6 +1,6 @@
 ﻿using Evently.Common.Domain;
-using Evently.Common.Presentation.ApiResults;
 using Evently.Common.Presentation.Endpoints;
+using Evently.Common.Presentation.Results;
 using Evently.Modules.Events.Application.Events;
 using Evently.Modules.Events.Application.Events.GetEvent;
 using MediatR;
@@ -17,7 +17,7 @@ internal sealed class GetEvent : IEndpoint
             {
                 Result<EventResponse> result = await sender.Send(new GetEventQuery(id));
 
-                return result.Match(Results.Ok, Common.Presentation.ApiResults.ApiResults.Problem);
+                return result.Match(Results.Ok, ApiResults.Problem);
             })
             .WithTags(Tags.Events);
     }
